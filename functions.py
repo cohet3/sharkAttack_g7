@@ -1,5 +1,9 @@
 # ARCHIVO PARA LAS FUNCIONES GLOBAL
 # AVISAR ANTES DE PUSHEAR, SI SE MODIFICA SE PUEDE EXCLUIR DEL PUSH
+import numpy as np
+import warnings as wrn
+import panda as pd
+
 
 import pandas as pd
 
@@ -26,6 +30,44 @@ def drop_rows_nulls(data_frame, thresh=2): #Opción buena
     data_frame_clean = data_frame.dropna(thresh=thresh)
 
     return data_frame_clean
+
+def clean_and_filter_dates(dataframe, column_name, year): # Limpia la fecha y filtra por año
+
+    def clean_datetimes(df_general):
+
+        for fmt in ('%d %b %Y', '%d-%b-%Y', '%d %b-%Y', '%d-%b-%Y', '%d %b %y'):
+            try:
+                return pd.to_datetime(df_general, format=fmt)
+            except ValueError:
+                continue
+            
+        return pd.NaT
+    
+    with wrn.catch_warnings():
+        wrn.simplefilter(action='ignore', category=pd.errors.SettingWithCopyWarning)
+    
+    dataframe_copy = dataframe.copy()
+    
+    dataframe_copy[column_name] = dataframe_copy[column_name].apply(clean_datetimes)
+
+    limit_year = pd.Timestamp(f'{year}-12-31')
+    dataframe_filtered = dataframe_copy[dataframe_copy[column_name] > limit_year].copy()
+    dataframe_filtered[column_name] = dataframe_filtered[column_name].dt.strftime('%Y-%m-%d')
+    dataframe_filtered[column_name] = pd.to_datetime(dataframe_filtered[column_name])
+
+    return dataframe_filtered
+
+def temp_date_df(data_frame, column_name):
+
+    data_frame[column_name] = pd.to_datetime(data_frame[column_name])
+
+    data_frame_tmp = pd.DataFrame({
+       'year' : data_frame[column_name].dt.year,
+       'month' : data_frame[column_name].dt.month,
+       'day' : data_frame[column_name].dt.day
+    })
+
+    return data_frame_tmp
 
 def generate_case_numbers(data_frame, prefix = 'ND.', start_index = 1): # ESTA FUNCIÓN DEBE IR AL FINAL DEL TODO, PARA GENERAR LOS CÓDIGOS ÚNICOS PARA CADA CASO
 
