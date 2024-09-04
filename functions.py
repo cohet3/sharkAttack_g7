@@ -1,27 +1,35 @@
 # ARCHIVO PARA LAS FUNCIONES GLOBAL
 # AVISAR ANTES DE PUSHEAR, SI SE MODIFICA SE PUEDE EXCLUIR DEL PUSH
 
-def clean_columns_names(shark_attack_raw):
-    shark_attack_raw_1 = shark_attack_raw.columns.map(lambda col: col.replace(' ', '_'))
-    shark_attack_raw_2 = shark_attack_raw_1.rename(columns=lambda x: x.lower())
-    shark_attack_raw_3 = shark_attack_raw_2.drop(columns=['unnamed:_11', 'unnamed:_21', 'unnamed:_22', 'case_number.1'])
+def clean_columns_names(data_frame, columns_to_drop=None): #Opción buena
+    
+    data_frame.columns = data_frame.columns.str.replace(' ', '_').str.lower()
 
-    shark_attack_clean = shark_attack_raw_3
+    return data_frame
 
-    return shark_attack_clean
+def columns_drops(data_frame, columns_to_drop=None): #Opción buena
+    
+    if columns_to_drop is not None:
+        data_frame = data_frame.drop(columns=columns_to_drop, errors='ignore')
 
+    return data_frame
 
-def clean_columns_rows(shark_attack_raw):
+def drop_rows_nulls(data_frame, thresh=2): #Opción buena
 
-    shark_attack_clean = shark_attack_raw.dropna(thresh = 2)
+    if thresh > 1:
+        raiserror('Threshold must be 1 or less.')
 
-    return shark_attack_clean
+    data_frame_clean = data_frame.dropna(thresh=thresh)
 
-def generate_case_numbers(shark_attack_clean): # ESTA FUNCIÓN DEBE IR AL FINAL DEL TODO, PARA GENERAR LOS CÓDIGOS ÚNICOS PARA CADA CASO
+    return data_frame_clean
 
-    shark_attack_clean = shark_attack_clean.iloc[::-1]
-    shark_attack_clean['case_number'] = shark_attack_clean.reset_index(drop=True).index + 1
-    shark_attack_clean['case_number'] = 'ND.' + shark_attack_clean['case_number'].apply(lambda x: f'{x:04d}')
-    shark_attack_clean = shark_attack_clean.iloc[::-1]
+def generate_case_numbers(data_frame, prefix = 'ND.', start_index = 1): # ESTA FUNCIÓN DEBE IR AL FINAL DEL TODO, PARA GENERAR LOS CÓDIGOS ÚNICOS PARA CADA CASO
 
-    return shark_attack_clean
+    data_frame_reversed = data_frame.iloc[::-1].reset_index(drop=True)
+    
+    data_frame_reversed['case_number'] = data_frame_reversed.index + start_index
+    data_frame_reversed['case_number'] = prefix + data_frame_reversed['case_number'].apply(lambda x: f'{x:04d}')
+
+    data_frame_final = data_frame_reversed.iloc[::-1].reset_index(drop=True)
+
+    return data_frame_final
