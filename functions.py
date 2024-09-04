@@ -1,6 +1,9 @@
 # ARCHIVO PARA LAS FUNCIONES GLOBAL
 # AVISAR ANTES DE PUSHEAR, SI SE MODIFICA SE PUEDE EXCLUIR DEL PUSH
 
+import pandas as pd
+
+
 def clean_columns_names(data_frame, columns_to_drop=None): #Opción buena
     
     data_frame.columns = data_frame.columns.str.replace(' ', '_').str.lower()
@@ -16,8 +19,9 @@ def columns_drops(data_frame, columns_to_drop=None): #Opción buena
 
 def drop_rows_nulls(data_frame, thresh=2): #Opción buena
 
-    if thresh > 1:
-        raiserror('Threshold must be 1 or less.')
+    if thresh < 1:
+        raise ValueError('Threshold must be 1 or less.') 
+        
 
     data_frame_clean = data_frame.dropna(thresh=thresh)
 
