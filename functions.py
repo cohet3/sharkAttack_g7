@@ -57,6 +57,16 @@ def clean_and_filter_dates(dataframe, column_name, year): # Limpia la fecha y fi
 
     return dataframe_filtered
 
+def categorize_injury(injury_text):
+    injury_text = str(injury_text).lower()
+
+    fatal_keywords = ['fatal', 'death', 'died', 'deceased', 'dead']
+
+    if any(keyword in injury_text for keyword in fatal_keywords):
+        return 'Fatal'
+    else:
+        return 'No Fatal'
+
 def temp_date_df(data_frame, column_name):
 
     data_frame[column_name] = pd.to_datetime(data_frame[column_name])
