@@ -45,10 +45,11 @@ To validate or refute our hypotheses, we will gather and analyze the following d
 
 ## Methodology
 
-1. **Data Cleaning**: Processing the raw data to handle missing values, remove duplicates, and correct errors.
-2. **Exploratory Data Analysis (EDA)**: Understanding the distribution of data, detecting trends, and identifying correlations between variables.
-3. **Hypothesis Testing**: Using statistical techniques to test our initial assumptions and draw meaningful conclusions from the data.
-4. **Visualization**: Presenting the findings through informative visualizations such as heat maps, bar charts, and geographical maps.
+1. **Bussiness problem and hypothesis definition**: Define the business problem and the data we need to test our hypothesis. 
+2. **Data Cleaning**: Processing the raw data to handle missing values, remove duplicates, and correct errors.
+3. **Exploratory Data Analysis (EDA)**: Understanding the distribution of data, detecting trends, and identifying correlations between variables.
+4. **Hypothesis Testing**: Using statistical techniques to test our initial assumptions and draw meaningful conclusions from the data.
+5. **Visualization**: Presenting the findings through informative visualizations such as heat maps, bar charts, and geographical maps.
 
 ## Results
 
