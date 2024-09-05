@@ -1,27 +1,25 @@
 # ARCHIVO PARA LAS FUNCIONES GLOBAL
 # AVISAR ANTES DE PUSHEAR, SI SE MODIFICA SE PUEDE EXCLUIR DEL PUSH
+import re
 import numpy as np
 import warnings as wrn
-import panda as pd
-
-
 import pandas as pd
 
 
-def clean_columns_names(data_frame, columns_to_drop=None): #Opción buena
+def clean_columns_names(data_frame, columns_to_drop=None): #
     
     data_frame.columns = data_frame.columns.str.replace(' ', '_').str.lower()
 
     return data_frame
 
-def columns_drops(data_frame, columns_to_drop=None): #Opción buena
+def columns_drops(data_frame, columns_to_drop=None): #
     
     if columns_to_drop is not None:
         data_frame = data_frame.drop(columns=columns_to_drop, errors='ignore')
 
     return data_frame
 
-def drop_rows_nulls(data_frame, thresh=2): #Opción buena
+def drop_rows_nulls(data_frame, thresh=2): #
 
     if thresh < 1:
         raise ValueError('Threshold must be 1 or less.') 
@@ -31,7 +29,7 @@ def drop_rows_nulls(data_frame, thresh=2): #Opción buena
 
     return data_frame_clean
 
-def clean_and_filter_dates(dataframe, column_name, year): # Limpia la fecha y filtra por año
+def clean_and_filter_dates(dataframe, column_name, year): # 
 
     def clean_datetimes(df_general):
 
@@ -66,6 +64,21 @@ def categorize_injury(injury_text):
         return 'Fatal'
     else:
         return 'No Fatal'
+    
+def filter_activity(activity_text):
+
+    if pd.isna(activity_text):
+        return "Unknown"
+    
+    activity_text = str(activity_text).lower()
+
+    words = activity_text.split()
+
+    common_words = ['a', 'an', 'the', 'in', 'of', 'on', 'for', 'with', 'and', 'while', 'from']
+
+    for word in words:
+        if word not in common_words:
+            return word.capitalize()
 
 def temp_date_df(data_frame, column_name):
 
@@ -79,7 +92,7 @@ def temp_date_df(data_frame, column_name):
 
     return data_frame_tmp
 
-def generate_case_numbers(data_frame, prefix = 'ND.', start_index = 1): # ESTA FUNCIÓN DEBE IR AL FINAL DEL TODO, PARA GENERAR LOS CÓDIGOS ÚNICOS PARA CADA CASO
+def generate_case_numbers(data_frame, prefix = 'ND.', start_index = 1): # 
 
     data_frame_reversed = data_frame.iloc[::-1].reset_index(drop=True)
     
