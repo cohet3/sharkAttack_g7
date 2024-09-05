@@ -1,4 +1,5 @@
-
+# ARCHIVO PARA LAS FUNCIONES GLOBAL
+# AVISAR ANTES DE PUSHEAR, SI SE MODIFICA SE PUEDE EXCLUIR DEL PUSH
 import numpy as np
 import warnings as wrn
 import pandas as pd
@@ -22,30 +23,14 @@ def columns_drops(data_frame, columns_to_drop=None): #Opción buena
 
 def drop_rows_nulls(data_frame, thresh=2): #Opción buena
 
-    if thresh > 1:
+    if thresh < 1:
         raise ValueError('Threshold must be 1 or less.') 
         
 
     data_frame_clean = data_frame.dropna(thresh=thresh)
 
     return data_frame_clean
-
-def drop_duplicates(data_frame, subset=None, keep='first', inplace=False):
-    """
-    Elimina duplicados en el DataFrame.
     
-    Parámetros:
-    data_frame (pd.DataFrame): El DataFrame donde se eliminarán los duplicados.
-    subset (list, optional): Lista de columnas sobre las cuales se revisará si hay duplicados. 
-                             Si es None, se usarán todas las columnas.
-    keep (str, optional): 'first' (default) mantiene la primera aparición, 'last' mantiene la última, 
-                          False elimina todas las filas duplicadas.
-    inplace (bool, optional): Si True, realiza la operación en el DataFrame original sin crear una copia.
-    
-    Retorna:
-    pd.DataFrame: DataFrame sin duplicados (si inplace=False).
-    """
-    return data_frame.drop_duplicates(subset=subset, keep=keep, inplace=inplace)
 
 def clean_and_filter_dates(dataframe, column_name, year): # Limpia la fecha y filtra por año
 
