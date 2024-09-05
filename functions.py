@@ -2,7 +2,7 @@
 # AVISAR ANTES DE PUSHEAR, SI SE MODIFICA SE PUEDE EXCLUIR DEL PUSH
 import numpy as np
 import warnings as wrn
-import panda as pd
+import pandas as pd
 
 
 import pandas as pd
