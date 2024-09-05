@@ -5,13 +5,9 @@ import warnings as wrn
 import pandas as pd
 import re
 
-
-import pandas as pd
-
-
-def clean_columns_names(data_frame, columns_to_drop=None): #Opción buena
+def clean_columns_names(data_frame): #Opción buena
     
-    data_frame.columns = data_frame.columns.str.replace(' ', '_').str.lower()
+    data_frame.columns = data_frame.columns.str.strip().str.replace(' ', '_').str.lower()
 
     return data_frame
 
