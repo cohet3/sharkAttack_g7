@@ -1,0 +1,9 @@
+Python libreries:
+
+pandas
+numpy
+re
+warnings
+geopandas
+matplotlib.pyplot
+geodatasets
