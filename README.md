@@ -78,7 +78,7 @@ To replicate or build upon this analysis, follow these steps:
    pip install -r requirements.txt
 3. Run the analysis scripts in the src/ directory
      ```bash
-   python src/main.py
+   python src/main.ipynb
 
 
 ## Future Work
