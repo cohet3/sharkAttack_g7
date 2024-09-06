@@ -1,9 +1,13 @@
-# ARCHIVO PARA LAS FUNCIONES GLOBAL
-# AVISAR ANTES DE PUSHEAR, SI SE MODIFICA SE PUEDE EXCLUIR DEL PUSH
+# Global functions file. 
+# Warn before push (if there's a problem, the push can be rejected) 
+
 import numpy as np
 import warnings as wrn
 import pandas as pd
 import re
+from geopy.geocoders import Nominatim
+from geopy.extra.rate_limiter import RateLimiter
+
 
 def clean_columns_names(data_frame): #Opción buena
     
@@ -109,3 +113,55 @@ def clean_strings(string):
         new_str = re.sub(r"\s+", " ", new_str)
         new_str = new_str.strip()
     return new_str
+
+
+
+def filter_activity(activity_text):
+    """
+    Filters the activities that victims were doing by trying to clean common words
+    """
+    if pd.isna(activity_text):
+        return "Unknown"
+    activity_text = str(activity_text).lower()
+    words = activity_text.split()
+    common_words = ['a', 'an', 'the', 'in', 'of', 'on', 'for', 'with', 'and', 'while', 'from']
+    for word in words:
+        if word not in common_words:
+            return word.capitalize()
+
+
+
+
+
+
+# Función para obtener las coordenadas a partir de un DataFrame con columnas genéricas
+def get_coordinates(csv_path, file_name, column_name_1='location', column_name_2='state', column_name_3='country'):
+
+    df= pd.read_csv('shark_attack_clean.csv')
+
+    # Configure the geolocator
+    geolocator = Nominatim(user_agent="mi_geocodificador")
+
+    # Use RateLimiter to limit the queries
+    geocode = RateLimiter(geolocator.geocode, min_delay_seconds=0.001)
+
+    # Función interna para geocodificar en orden: column_name_1, column_name_2, luego column_name_3
+    def obtener_coordenadas(fila):
+        gps_location = None
+        if pd.notna(fila[column_name_1]):
+            gps_location = geocode(fila[column_name_1])
+        if gps_location is None and pd.notna(fila[column_name_2]):
+            gps_location = geocode(fila[column_name_2])
+        if gps_location is None and pd.notna(fila[column_name_3]):
+            gps_location = geocode(fila[column_name_3])
+        return gps_location
+
+    # Crear columnas de latitud y longitud en el DataFrame
+    df['coordenadas'] = df.apply(obtener_coordenadas, axis=1)
+    df['latitude'] = df['coordenadas'].apply(lambda loc: loc.latitude if loc else None)
+    df['longitude'] = df['coordenadas'].apply(lambda loc: loc.longitude if loc else None)
+
+    # Elimina la columna temporal 'coordenadas'
+    df = df.drop(columns=['coordenadas'])
+
+    return df.to_csv(file_name)
