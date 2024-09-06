@@ -2,6 +2,7 @@
 <p align="center">
 <img src="tiburon.gif" alt="Tiburon con hambre">
 </p>
+
 ## Team Members
 
 | Name             | LinkedIn Profile | Brief Description |
