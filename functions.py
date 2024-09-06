@@ -60,6 +60,9 @@ def clean_and_filter_dates(dataframe, column_name, year): # Limpia la fecha y fi
     return dataframe_filtered
 
 def categorize_injury(injury_text):
+    """
+    Takes an injury text and categorizes it as 'Fatal' or 'No Fatal'
+    """
     injury_text = str(injury_text).lower()
 
     fatal_keywords = ['fatal', 'death', 'died', 'deceased', 'dead']
@@ -128,10 +131,6 @@ def filter_activity(activity_text):
     for word in words:
         if word not in common_words:
             return word.capitalize()
-
-
-
-
 
 
 # Función para obtener las coordenadas a partir de un DataFrame con columnas genéricas
