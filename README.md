@@ -10,7 +10,7 @@
 | Almudena Martín Castro         | https://www.linkedin.com/in/almudenamcastro/      |  Science communicator and data enthusiast |
 | Danny David Rodas Galarza         | https://www.linkedin.com/in/dannyrodasgalarza/     | Developer and Data Analyst |
 | Luis Humberto Rodríguez Fuentes        | https://www.linkedin.com/in/luis-h-rodr%C3%ADguez-fuentes/     | Data Analyst |
-| Adrián Benítez         | [LinkedIn 3]     | Data Analyst |
+| Adrián Benítez Rueda       | https://www.linkedin.com/in/adri%C3%A1n-ben%C3%ADtez-rueda-10102565/?originalSubdomain=es    | Data Analyst |
 
 ## Project Overview
 
@@ -41,8 +41,8 @@ To validate or refute our hypotheses, we will gather and analyze the following d
 
 ## Data Sources
 
-- Shark Attack Database: https://www.sharkattackfile.net/spreadsheets/GSAF5.xls
-- Presentación: [Link to source]
+- Shark Attack Database: [\[Link to source\]](https://www.sharkattackfile.net/spreadsheets/GSAF5.xls)
+- Presentación: [\[Link to source\]](https://docs.google.com/presentation/d/1TY9rHeRTEyUmi2aREjad6TL2w9h_PQFI1FtsjYlKhEA/edit?usp=sharing)
 
 ## Methodology
 
@@ -56,17 +56,17 @@ To validate or refute our hypotheses, we will gather and analyze the following d
 
 This section will include key findings and insights drawn from the analysis. For now, placeholders are provided for future updates:
 
-1. **Finding 1**: [Brief description of finding]
-2. **Finding 2**: [Brief description of finding]
-3. **Finding 3**: [Brief description of finding]
+1. **Finding 1**: since the 90s the attacks have increased, since 2007 the average has not dropped below 100, since 1995 global temperatures have started to rise.
+2. **Finding 2**: Most of the attacks were carried out in the United States and Australia.
+
 
 ## Tools and Technologies
 
 - **Programming Language**: Python
-- **Libraries**: Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn
-- **Visualization**: Plotly, Folium
+- **Libraries**: Pandas, NumPy, Matplotlib, Seaborn, 
+- **Visualization**: Plotly
 - **Version Control**: Git
-- **Data Storage**: CSV, SQL databases
+- **Data Storage**: CSV, xlsx.
 
 ## How to Use
 
