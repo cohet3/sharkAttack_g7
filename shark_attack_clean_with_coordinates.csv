@@ -1,4 +1,4 @@
-,Unnamed: 0,date,country,state,location,sex,age,species,injuries,activity,case_number,latitude,longitude
+,Unnamed: 0,date,country,state,location,sex,age,species,injury,activity,case_number,latitude,longitude
 0,0,2024-03-15,AUSTRALIA,Queensland,Bargara Beach,F,13,Tiger shark,No Fatal,Swimming,ND.2963,-24.81566635,152.46324745546372
 1,1,2024-03-04,USA,Hawaii,"Old Man's, Waikiki",M,,Tiger shark 8',No Fatal,Surfing,ND.2962,19.593801499999998,-155.42837009716908
 2,2,2024-03-02,USA,Hawaii,"Rainbows, Oahu",F,11,3' to 4' shark,No Fatal,Swimming,ND.2961,19.593801499999998,-155.42837009716908
